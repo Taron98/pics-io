@@ -1,0 +1,13 @@
+{
+  "mongo": {
+    "username": "root",
+    "password": "qazxsw",
+    "host": "ec2-54-191-140-193.us-west-2.compute.amazonaws.com",
+    "port": 27017,
+    "db": "rentx",
+    "authSource": "test"
+  },
+  "jwt": {
+    "secret": "k~^*xR)Zd3<}cLU$MX*ZnGBAm,*e"
+  }
+}
