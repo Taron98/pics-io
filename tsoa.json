@@ -7,7 +7,7 @@
     "specVersion": 3,
     "securityDefinitions": {
       "jwt": {
-        "type": "jwt",
+        "type": "JWT",
         "name": "x-access-token",
         "in": "headers"
       }

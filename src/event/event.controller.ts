@@ -1,5 +1,15 @@
 /** @format */
-import { Body, Controller, Post, Route, SuccessResponse, Tags, Request, Security } from 'tsoa';
+import {
+  Body,
+  Controller,
+  Post,
+  Route,
+  SuccessResponse,
+  Tags,
+  Request,
+  Security,
+  Header,
+} from 'tsoa';
 import { EventService } from './event.service';
 import { validate } from '../common';
 import { eventJoi } from './event.validation';
@@ -22,6 +32,7 @@ export class EventController extends Controller {
   public async event(
     @Body()
     reqBody: EventType,
+    @Header('x-access-token') _token: string,
   ): Promise<any> {
     const { _id } = await this.logService.log({ request: { body: reqBody } });
     validate(reqBody, eventJoi());

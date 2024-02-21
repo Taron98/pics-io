@@ -88,12 +88,12 @@ export class EventService {
 
     return result;
   }
-  decideForCustom(possibleDestinations, funcResponse: boolean) {
+  decideForCustom(possibleDestinations, funcResponse) {
     const result = {};
-
+    const decider = new Function(`return ${funcResponse}`);
     for (const destination of possibleDestinations) {
       for (const key in destination) {
-        result[key] = funcResponse;
+        result[key] = decider();
       }
     }
   }

@@ -18,10 +18,7 @@ export function identifyTokenAndDecode(
   request: express.Request,
   securityName: string,
 ): Promise<any> {
-  const token =
-    // request.body.token ||
-    //   request.query.token ||
-    request.headers['x-access-token'] as string;
+  const token = request.headers['x-access-token'] as string;
 
   if (!token) {
     throw new Error('No token provided.');
@@ -29,14 +26,8 @@ export function identifyTokenAndDecode(
 
   const tokenPrefix = token.substr(0, token.indexOf(' '));
 
-  if (securityName === 'jwt' || (securityName === 'api_jwt' && !tokenPrefix)) {
+  if (securityName === 'jwt') {
     return decodeJWT(token);
-  } else if (
-    (securityName === 'api' || (securityName === 'api_jwt' && tokenPrefix === 'APIKey')) &&
-    token === `APIKey a6a66ca5-078e-4ad4-80c7-2dd2da536880` // TODO read from config
-  ) {
-    request.headers['api-access'] = 'true';
-    return Promise.resolve({ API_ACCESS: true });
   }
 
   return Promise.reject(new Error('No valid token provided'));
